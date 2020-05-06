@@ -1,6 +1,7 @@
 import React from "react";
 import { connect, Global, css } from "frontity";
 import Home from './Home'
+import Link from './Link'
 
 import { ThemeProvider } from 'emotion-theming'
 import theme from './styles/theme'
@@ -21,7 +22,12 @@ const Root = ({ state }) => {
       
       <ThemeProvider theme={theme}>
         {data.isHome && <Home />}
-        {!data.isHome && <p>You're at <pre>{state.router.link}</pre></p>}
+        {!data.isHome && (
+          <div>
+            <p>You're at <pre>{state.router.link}</pre></p>
+            <Link href='/'>&lt; Back to Home</Link>
+          </div>
+          )}
       </ThemeProvider>
     </>
   );

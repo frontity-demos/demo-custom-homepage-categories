@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { connect, styled } from "frontity";
-import {getPostsGroupedByCategory, createMarkupObject, getRandomColor} from '../helpers/'
+import {getPostsGroupedByCategory, createMarkupObject, getRandomColor} from './helpers'
 import {
   Box,
   Card,
@@ -10,11 +10,13 @@ import {
 } from 'rebass'
 import Link from './Link'
 
-const Home = ({ state }) => {
+const Home = ({ state, actions }) => {
 
   const data = state.source.get(state.router.link)
   const postsPerCategory = getPostsGroupedByCategory(state.source)
-console.log(postsPerCategory)
+
+  console.log(postsPerCategory)
+
   return (
     <>
       <Flex>
@@ -33,7 +35,7 @@ console.log(postsPerCategory)
 
                         <Box px={2}>
                           <Link href={post.link}>
-                            <Heading as='h3'>{post.title.rendered}</Heading>
+                            <Heading as='h3' dangerouslySetInnerHTML={createMarkupObject(post.title.rendered)}  />
                           </Link>
                           <Text dangerouslySetInnerHTML={createMarkupObject(post.excerpt.rendered)} />
                         </Box>

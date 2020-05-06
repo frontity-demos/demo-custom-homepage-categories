@@ -1,4 +1,7 @@
-export const getCategoriesIds = ({ category }) => Object.keys(category)
+import {categoriesWidgetsHome} from '../config'
+
+// export const getCategoriesIds = categories => Object.keys(categories)
+// export const getCategoriesValues = categories => Object.keys(categories)
 
 export const getPostsFromCategory = ({ post }, categoryId) =>
   Object.keys(post)
@@ -6,8 +9,7 @@ export const getPostsFromCategory = ({ post }, categoryId) =>
     .filter(({categories}) => categories.includes(+categoryId) )
 
 export const getPostsGroupedByCategory = source =>  {
-  const categoriesIDs = getCategoriesIds(source)
-  return categoriesIDs.reduce((acc, categoryId) => {
+  return Object.keys(categoriesWidgetsHome).reduce((acc, categoryId) => {
     const posts = getPostsFromCategory(source, categoryId).slice(0,5)
     const category = source.category[categoryId] 
     return [{posts, category}, ...acc]
@@ -17,5 +19,4 @@ export const getPostsGroupedByCategory = source =>  {
 export const createMarkupObject = renderedHtml => ({__html: renderedHtml})
 
 export const getRandomColor = () =>
-  '#' + new Array(6).fill(0).map(digit => '0123456789ABCDEF'[Math.floor(Math.random() * 16)]).join('')
-
+  '#' + new Array(6).fill(0).map(digit => '0123456789ABCDEF'[Math.floor(Math.random() * 16)]).join('')  
