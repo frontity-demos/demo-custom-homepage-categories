@@ -15,7 +15,17 @@ const Home = ({ state, actions }) => {
   const data = state.source.get(state.router.link)
   const postsPerCategory = getPostsGroupedByCategory(state.source)
 
-  console.log(postsPerCategory)
+  useEffect(() => {
+    const attachExtraDataToState = async () => {
+      console.log(state.router.link)
+      console.log('getting data from useEffect...')
+      await Promise.all(
+        Object.values(categoriesWidgetsHome)
+          .map(category => actions.source.fetch(`/category/${category}/`))
+      )
+    }
+    attachExtraDataToState()
+  });
 
   return (
     <>
