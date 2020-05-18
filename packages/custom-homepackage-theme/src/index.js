@@ -12,7 +12,7 @@ export default {
   },
   actions: {
     theme: {
-      beforeSSR: async ({ state, actions }) => {
+      init: async ({ state, actions }) => {
         if (state.router.link === "/") {
           
           console.log(state.router.link)
